@@ -95,19 +95,31 @@
         /* QR Code overlay - để bạn có thể thêm QR code riêng nếu muốn */
         .qr-code-overlay {
             position: absolute;
-            top: 50%;
+            margin-top: 17%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 140px;
-            height: 140px;
-            display: none; /* Ẩn đi vì đã có trong hình */
+            width: 100px;
+            height: 100px;
+            display: block; /* Hiển thị QR code */
+            z-index: 20;
+            background: transparent;
+            animation: qrPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes qrPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.08);
+            }
         }
 
         .qr-code-overlay img {
             width: 100%;
             height: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            display: block;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
         }
 
         /* Hoa rơi */
@@ -139,7 +151,7 @@
             font-size: 1.3rem;
             font-weight: 600;
             margin-top: 30px;
-            animation: bounce 2s ease-in-out infinite;
+            /* animation: bounce 2s ease-in-out infinite; */
             text-shadow: 0 2px 10px rgba(255, 20, 147, 0.3);
         }
 
@@ -204,20 +216,20 @@
     <!-- Tiêu đề -->
     <div class="header-title">
         <h1>Tặng em nè</h1>
+        
+        <!-- QR Code ngay dưới tiêu đề -->
+        <div class="qr-code-overlay">
+            <img src="./assets/qrcode-2010.svg" alt="QR Code">
+        </div>
     </div>
 
     <!-- Container chính -->
     <div class="main-container">
         <!-- Bó hoa tulip với QR code - sử dụng hình ảnh -->
-        <div class="tulip-bouquet-wrapper" onclick="goToMainPage(event)">
+        <div class="tulip-bouquet-wrapper">
             <div class="tulip-bouquet">
                 <!-- Hình bó hoa có QR code -->
                 <img src="./assets/hoaqrcode.png" alt="Bó hoa QR Code">
-                
-                <!-- Nếu muốn thêm QR code riêng lên trên, bỏ comment dòng dưới -->
-                <!-- <div class="qr-code-overlay">
-                    <img src="./assets/qrcode.png" alt="QR Code">
-                </div> -->
             </div>
         </div>
 
@@ -253,7 +265,7 @@
         }
 
         // Tạo hoa rơi liên tục
-        setInterval(createFallingFlower, 200);
+        setInterval(createFallingFlower, 300);
 
         // Tạo hiệu ứng khi click
         function createClickEffect(x, y) {
