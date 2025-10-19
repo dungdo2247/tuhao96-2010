@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tặng nè 🌷</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Mali", cursive;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe8f0 50%, #fff5f8 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Tiêu đề "Tặng nè" */
+        .header-title {
+            text-align: center;
+            padding: 20px 20px 10px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-title h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Container chính */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 100px);
+            padding: 20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Bó hoa tulip chính - sử dụng hình ảnh */
+        .tulip-bouquet-wrapper {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: bouquetFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes bouquetFloat {
+            0%, 100% { 
+                transform: translateY(0) scale(1);
+            }
+            50% { 
+                transform: translateY(-15px) scale(1.02);
+            }
+        }
+
+        .tulip-bouquet-wrapper:hover {
+            transform: scale(1.08) !important;
+            filter: brightness(1.1);
+        }
+
+        .tulip-bouquet {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .tulip-bouquet img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 15px 40px rgba(255, 20, 147, 0.3));
+        }
+
+        /* QR Code overlay - để bạn có thể thêm QR code riêng nếu muốn */
+        .qr-code-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            display: none; /* Ẩn đi vì đã có trong hình */
+        }
+
+        .qr-code-overlay img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hoa rơi */
+        .falling-flower {
+            position: fixed;
+            font-size: 2rem;
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.8;
+            top: -150px; /* Bắt đầu từ cao hơn */
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-200px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(calc(100vh + 200px)) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* Chỉ dẫn */
+        .instruction {
+            text-align: center;
+            color: #ff1493;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 30px;
+            animation: bounce 2s ease-in-out infinite;
+            text-shadow: 0 2px 10px rgba(255, 20, 147, 0.3);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Click effect */
+        .click-effect {
+            position: fixed;
+            pointer-events: none;
+            animation: clickSpread 0.8s ease-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes clickSpread {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title h1 {
+                font-size: 2.5rem;
+            }
+
+            .tulip-bouquet {
+                max-width: 320px;
+            }
+
+            .instruction {
+                font-size: 1rem;
+                margin-top: 20px;
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title h1 {
+                font-size: 2rem;
+            }
+
+            .tulip-bouquet {
+                max-width: 280px;
+            }
+
+            .instruction {
+                font-size: 0.9rem;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tiêu đề -->
+    <div class="header-title">
+        <h1>Tặng em nè</h1>
+    </div>
+
+    <!-- Container chính -->
+    <div class="main-container">
+        <!-- Bó hoa tulip với QR code - sử dụng hình ảnh -->
+        <div class="tulip-bouquet-wrapper" onclick="goToMainPage(event)">
+            <div class="tulip-bouquet">
+                <!-- Hình bó hoa có QR code -->
+                <img src="./assets/hoaqrcode.png" alt="Bó hoa QR Code">
+                
+                <!-- Nếu muốn thêm QR code riêng lên trên, bỏ comment dòng dưới -->
+                <!-- <div class="qr-code-overlay">
+                    <img src="./assets/qrcode.png" alt="QR Code">
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Chỉ dẫn -->
+        <div class="instruction">
+            Em scan mã QR nha
+        </div>
+    </div>
+
+    <!-- Nhạc nền -->
+    <audio id="bgMusic" loop>
+        <source src="./assets/a.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+        let musicStarted = false;
+
+        // Tạo hoa rơi
+        function createFallingFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('falling-flower');
+            const flowers = ['🌸', '🌺', '🌷', '🌹', '💐', '🌼'];
+            flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            flower.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 7000);
+        }
+
+        // Tạo hoa rơi liên tục
+        setInterval(createFallingFlower, 200);
+
+        // Tạo hiệu ứng khi click
+        function createClickEffect(x, y) {
+            const hearts = ['💕', '💗', '💖', '💝', '🌸'];
+            const numHearts = 15;
+
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('click-effect');
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                
+                const angle = (Math.PI * 2 / numHearts) * i;
+                const distance = Math.random() * 100 + 50;
+                
+                heart.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                heart.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+                
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 800);
+            }
+        }
+
+        // Chuyển sang trang chính
+        function goToMainPage(e) {
+            createClickEffect(e.clientX, e.clientY);
+            
+            // Phát nhạc
+            if (!musicStarted) {
+                bgMusic.play().catch(err => console.log('Music play prevented:', err));
+                musicStarted = true;
+            }
+
+            // Chuyển trang sau 0.5s
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 500);
+        }
+
+        // Phát nhạc khi click vào bất kỳ đâu
+        document.body.addEventListener('click', function(e) {
+            if (!musicStarted && e.target.tagName !== 'A') {
+                bgMusic.play().catch(err => console.log('Music play prevented:', err));
+                musicStarted = true;
+            }
+        }, { once: true });
+
+        // Tạo hiệu ứng click ngẫu nhiên để trang thêm sống động
+        setInterval(() => {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            
+            // Tạo sparkle nhỏ
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.fontSize = '1.5rem';
+            sparkle.textContent = '✨';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '1';
+            sparkle.style.animation = 'fall 3s linear forwards';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }, 2000);
+    </script>
+</body>
+</html>
